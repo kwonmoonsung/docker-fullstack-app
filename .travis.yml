@@ -15,7 +15,9 @@ after_success:
   - docker build -t kwonmoonsung/docker-frontend ./frontend
   - docker build -t kwonmoonsung/docker-backend ./backend
   - docker build -t kwonmoonsung/docker-nginx ./nginx
+
   - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
+  
   - docker push kwonmoonsung/docker-frontend
   - docker push kwonmoonsung/docker-backend
   - docker push kwonmoonsung/docker-nginx
@@ -25,10 +27,10 @@ deploy:
   region: "ap-northeast-2"
   app: "docker-fullstack-app"
   env: "Dockerfullstackapp-env"
-  bucket_name: "elasticbeanstalk-ap-northeast-2-466346727417"
+  bucket_name: elasticbeanstalk-ap-northeast-2-466346727417
   bucket_path: "docker-fullstack-app"
   on:
     branch: master
 
-access_key_id: "$AWS_ACCESS_KEY"
-secret_access_key: "$AWS_SECRET_ACCESS_KEY"
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY"
